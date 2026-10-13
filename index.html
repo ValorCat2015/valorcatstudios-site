@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Valor Cat Studios | Makers of Spectra Render</title>
+<meta name="description" content="Valor Cat Studios makes Spectra Render, realtime wave optics for Blender, and the animated series Valor Cat. Los Angeles.">
+<meta property="og:site_name" content="Valor Cat Studios">
+<meta property="og:title" content="Valor Cat Studios | Makers of Spectra Render">
+<meta property="og:description" content="Spectra Render: realtime wave optics for Blender. From the studio behind the animated series Valor Cat.">
+<meta property="og:image" content="https://www.valorcatstudios.com/assets/spectra/diamondbod.webp">
+<meta property="og:image:width" content="1448">
+<meta property="og:image:height" content="1203">
+<meta property="og:url" content="https://www.valorcatstudios.com/">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#05060a">
+<link rel="canonical" href="https://www.valorcatstudios.com/">
+<link rel="icon" type="image/png" href="assets/logo/favicon.png">
+<link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+<link rel="preload" as="font" type="font/ttf" href="assets/fonts/outfit.ttf" crossorigin>
+<style>
+@font-face { font-family: "Outfit"; src: url(assets/fonts/outfit.ttf) format("truetype"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: "Michroma"; src: url(assets/fonts/michroma.ttf) format("truetype"); font-display: swap; }
+:root {
+  --bg: #05060a; --bg2: #0b0d13; --line: rgba(255,255,255,.1);
+  --text: #eef1f6; --dim: #a4adba; --faint: #8a93a1; --ring: #6cd0ff;
+  --spectrum: linear-gradient(90deg, #6a2cff 0%, #3a4bff 14%, #00a8ff 28%, #00f0d0 40%, #5dff4a 52%, #e8ff2a 62%, #ffb400 72%, #ff5a1a 84%, #d4002a 94%, #6a0010 100%);
+  --sans: "Outfit", "Helvetica Neue", Arial, sans-serif;
+  --display: "Michroma", "Outfit", sans-serif;
+  --max: 1200px;
+  --ease: cubic-bezier(.16, 1, .3, 1);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; color-scheme: dark; scrollbar-color: #2b3242 var(--bg); scrollbar-width: thin; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: #2b3242; border-radius: 6px; border: 2px solid var(--bg); }
+::-webkit-scrollbar-thumb:hover { background: #3b4458; }
+::selection { background: rgba(0,168,255,.4); color: #fff; }
+:focus-visible { outline: 2px solid var(--ring); outline-offset: 3px; border-radius: 4px; }
+body { background: var(--bg); color: var(--text); font: 400 1.0625rem/1.65 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; text-decoration: none; }
+.u { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1px; text-decoration-color: rgba(255,255,255,.35); transition: text-decoration-color .2s; }
+.u:hover { text-decoration-color: var(--ring); }
+img, video { display: block; max-width: 100%; }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 28px; }
+.skip { position: absolute; left: 12px; top: -60px; z-index: 100; background: #fff; color: #05060a; padding: 8px 14px; border-radius: 6px; }
+.skip:focus { top: 12px; }
+
+header.top { position: sticky; top: 0; z-index: 50; background: var(--bg); border-bottom: 1px solid var(--line); }
+header.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+.brand img { height: 52px; width: auto; }
+header.top nav { display: flex; gap: 28px; font-size: .95rem; font-weight: 500; color: var(--dim); }
+header.top nav a { padding: 6px 0; transition: color .2s; }
+header.top nav a:hover { color: var(--text); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 12px 24px; border-radius: 999px; font-weight: 600; font-size: 1rem; border: 1px solid rgba(255,255,255,.28); background: transparent; color: var(--text); transition: transform .25s var(--ease), border-color .2s, background .2s; white-space: nowrap; }
+.btn:hover { transform: translateY(-1px); border-color: rgba(255,255,255,.6); }
+.btn.prime { background: #fff; color: #05060a; border-color: #fff; }
+.btn.prime:hover { background: #dfe6f0; }
+
+.hero { position: relative; min-height: min(84vh, 820px); display: flex; align-items: flex-end; overflow: hidden; isolation: isolate; }
+.hero > img { position: absolute; inset: 0; z-index: -2; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; animation: settle 2s var(--ease) both; }
+.hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, rgba(5,6,10,.25) 0%, rgba(5,6,10,0) 28%, rgba(5,6,10,.78) 72%, var(--bg) 100%); }
+@keyframes settle { from { transform: scale(1.05); } }
+.hero .wrap { width: 100%; padding-bottom: 72px; padding-top: 140px; }
+.hero h1 { font: 400 clamp(2.3rem, 6.4vw, 5.2rem)/1.05 var(--display); letter-spacing: -.02em; max-width: 12ch; text-wrap: balance; }
+.hero .lede { max-width: 54ch; margin-top: 22px; font-size: clamp(1.1rem, 1.7vw, 1.3rem); color: #d3d9e2; }
+.hero .ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+.hero .cap { position: absolute; right: 28px; bottom: 20px; max-width: 34ch; font-size: .82rem; line-height: 1.45; color: var(--dim); text-align: right; }
+
+section { padding: 128px 0 0; scroll-margin-top: 72px; }
+h2 { font: 700 clamp(1.9rem, 4vw, 3rem)/1.1 var(--sans); letter-spacing: -.02em; text-wrap: balance; max-width: 22ch; }
+h3 { font: 600 1.3rem/1.3 var(--sans); letter-spacing: -.005em; }
+p { max-width: 68ch; }
+.sub { color: var(--dim); margin-top: 20px; }
+
+#spectra { padding-top: 110px; }
+#spectra .rule { height: 1px; background: var(--spectrum); opacity: .8; margin-bottom: 72px; }
+#spectra h2 { font: 400 clamp(1.5rem, 3.2vw, 2.5rem)/1.2 var(--display); letter-spacing: -.02em; max-width: 16ch; }
+.spec-top { display: grid; grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: 64px; align-items: start; }
+.facts { margin-top: 40px; border-top: 1px solid var(--line); }
+.facts div { padding: 22px 0; border-bottom: 1px solid var(--line); }
+.facts dt { font-weight: 600; font-size: 1.1rem; }
+.facts dd { color: var(--dim); margin-top: 4px; max-width: 60ch; }
+figure { margin: 0; }
+figcaption { margin-top: 12px; font-size: .9rem; line-height: 1.5; color: var(--dim); max-width: 60ch; }
+figcaption b { color: var(--text); font-weight: 600; }
+.live video { width: 100%; height: auto; border-radius: 10px; background: #000; }
+.stills { columns: 2 380px; column-gap: 28px; margin-top: 80px; }
+.stills figure { break-inside: avoid; margin-bottom: 36px; }
+.stills img { width: 100%; height: auto; border-radius: 10px; }
+.more { margin-top: 12px; }
+
+.quote { position: relative; margin-top: 56px; border-radius: 10px; overflow: hidden; }
+.quote img { width: 100%; height: auto; }
+.quote blockquote { position: absolute; left: 0; right: 0; bottom: 0; padding: 120px 40px 36px; background: linear-gradient(180deg, transparent, rgba(5,6,10,.88)); }
+.quote p { font: 700 clamp(1.5rem, 3.6vw, 2.9rem)/1.12 var(--sans); letter-spacing: -.02em; max-width: 24ch; text-wrap: balance; }
+.quote cite { display: block; margin-top: 10px; font-style: normal; color: #cfd5de; }
+.season { margin-top: 64px; }
+.season h3 { margin-bottom: 22px; padding-bottom: 14px; border-bottom: 1px solid var(--line); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 32px 24px; }
+.vid .frame { position: relative; aspect-ratio: 16 / 9; background: #000; border-radius: 8px; overflow: hidden; }
+.vid iframe, .facade { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.facade { display: block; padding: 0; cursor: pointer; background: #000; color: #fff; }
+.facade img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease), opacity .3s; opacity: .9; }
+.facade:hover img { transform: scale(1.03); opacity: 1; }
+.facade .play { position: absolute; left: 50%; top: 50%; width: 60px; height: 60px; margin: -30px 0 0 -30px; border-radius: 50%; background: rgba(5,6,10,.72); border: 1.5px solid rgba(255,255,255,.85); display: grid; place-items: center; transition: transform .25s var(--ease), background .2s; }
+.facade:hover .play { transform: scale(1.08); background: rgba(5,6,10,.9); }
+.facade .play svg { margin-left: 3px; }
+.facade:focus-visible { outline-offset: -3px; }
+.vid p { margin-top: 10px; line-height: 1.4; }
+.vid p b { font-weight: 600; margin-right: 8px; color: var(--dim); font-variant-numeric: tabular-nums; }
+.vid p small { display: block; margin-top: 3px; font-size: .88rem; color: var(--faint); }
+
+.studio { display: grid; grid-template-columns: minmax(0, 300px) minmax(0, 1fr); gap: 56px; align-items: start; margin-top: 44px; }
+.studio img { width: 100%; height: auto; border-radius: 10px; }
+.studio p + p { margin-top: 1.1em; }
+.studio .links { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+.credits { margin-top: 64px; }
+.credits img { width: 100%; height: auto; border-radius: 10px; }
+
+.shop-row { display: flex; align-items: flex-start; gap: 10px; margin-top: 32px; overflow-x: auto; scroll-snap-type: x proximity; padding-bottom: 12px; }
+.shop-row a { flex: 1 0 80px; scroll-snap-align: start; border-radius: 6px; overflow: hidden; background: #0c0e14; transition: transform .25s var(--ease), opacity .2s; }
+.shop-row a:hover { transform: translateY(-3px); }
+.shop-row img { width: 100%; height: auto; }
+
+#contact { padding-bottom: 0; }
+.mail { display: inline-block; margin-top: 28px; font: 600 clamp(1.4rem, 3.4vw, 2.4rem)/1.2 var(--sans); letter-spacing: -.01em; }
+.social { list-style: none; display: flex; flex-wrap: wrap; gap: 10px 32px; margin-top: 32px; color: var(--dim); }
+.social a:hover { color: var(--text); }
+footer { margin-top: 112px; padding: 32px 0 48px; border-top: 1px solid var(--line); color: var(--faint); font-size: .86rem; }
+footer p { max-width: none; }
+
+@media (max-width: 900px) {
+  .spec-top { grid-template-columns: 1fr; gap: 48px; }
+  .studio { grid-template-columns: 1fr; gap: 32px; }
+  .studio figure { max-width: 280px; }
+  .hero .cap { position: static; text-align: left; padding: 0 28px 24px; max-width: none; }
+  .hero { flex-direction: column; justify-content: flex-end; align-items: stretch; }
+  .hero .wrap { padding-bottom: 28px; }
+  .shop-row a { flex-basis: 112px; }
+}
+@media (max-width: 560px) {
+  body { font-size: 1rem; }
+  .wrap { padding: 0 20px; }
+  header.top .wrap { height: 60px; gap: 12px; }
+  .brand img { height: 42px; }
+  header.top nav { gap: 14px; font-size: .84rem; }
+  section { padding-top: 88px; }
+  .quote blockquote { padding: 60px 20px 20px; }
+  .hero .cap { padding: 0 20px 20px; }
+  .grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#spectra">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Valor Cat Studios, top of page"><img src="assets/logo/vcs-logo.png" width="480" height="308" alt="Valor Cat Studios"></a>
+    <nav aria-label="Main">
+      <a href="#spectra">Spectra</a>
+      <a href="#films">Films</a>
+      <a href="#studio">Studio</a>
+      <a href="#shop">Shop</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+<div class="hero">
+  <img src="assets/spectra/diamondbod.webp" width="1448" height="1203" fetchpriority="high" alt="A crystal figure, a soap bubble and a cut gem, rendered by Spectra with rainbow dispersion through the glass">
+  <div class="wrap">
+    <h1>Spectra Render</h1>
+    <p class="lede">Valor Cat Studios presents realtime wave optics for Blender. Spectral, polarized and unbiased by construction, live in Blender's viewport on any ray-tracing GPU.</p>
+    <div class="ctas">
+      <a class="btn prime" href="https://spectra-render.com">Visit spectra-render.com</a>
+      <a class="btn" href="https://spectra-render.com/#beta">Join the beta</a>
+    </div>
+  </div>
+  <p class="cap"><b>Diamond Body.</b> Dispersion fire through cut crystal and thin-film colour on a soap bubble, traced wavelength by wavelength.</p>
+</div>
+
+<section id="spectra">
+  <div class="wrap">
+    <div class="rule" aria-hidden="true"></div>
+    <div class="spec-top">
+      <div>
+        <h2>Light, solved as a wave.</h2>
+        <p class="sub">Maxwell is the substrate, not a post-process. Interference, diffraction and polarization are computed per beam rather than painted on.</p>
+        <dl class="facts">
+          <div><dt>Spectral, always</dt><dd>Every path carries four wavelengths across the visible band, along with its full polarization state. There are no RGB approximations in the transport.</dd></div>
+          <div><dt>Fire in every facet</dt><dd>Wavelength-dependent index of refraction splits white light into rainbows. Diamonds sparkle because the physics says so.</dd></div>
+          <div><dt>An addon, not a fork</dt><dd>Install a zip into stock Blender. Spectra reads Principled-based materials, lights, cameras and colour management, with nothing to convert.</dd></div>
+        </dl>
+      </div>
+      <figure class="live">
+        <video src="assets/spectra/valorcat-vhs.mp4" poster="assets/spectra/valorcat-vhs-poster.webp" width="780" height="720" muted loop playsinline preload="none" aria-label="Screen capture of the Valor Cat hero character in Blender's viewport, rendered live by Spectra"></video>
+        <figcaption><b>Live viewport: Valor Cat.</b> Hero character scrubbed live in the viewport.</figcaption>
+      </figure>
+    </div>
+    <div class="stills">
+      <figure><img src="assets/spectra/thinfilm-spheres-thumb.webp" width="960" height="960" loading="lazy" alt="Four glossy spheres in a row, each with a different soap-bubble colour from increasing thin-film thickness"><figcaption><b>Thin-film ladder.</b> Four spheres with increasing thin-film thickness. The soap-bubble and oil-slick colours are solved per wavelength.</figcaption></figure>
+      <figure><img src="assets/spectra/gauntlet-classroom-thumb.webp" width="960" height="540" loading="lazy" alt="A classroom with warm sunlight coming through window blinds and falling across desks"><figcaption><b>Classroom.</b> Warm sunlight through the blinds of Blender's Classroom demo. Scene: Blender demo files (CC0).</figcaption></figure>
+      <figure><img src="assets/spectra/mantis-thumb.webp" width="960" height="887" loading="lazy" alt="Close-up of a praying mantis in macro"><figcaption><b>Mantis.</b> Macro creature study under spectral global illumination.</figcaption></figure>
+      <figure><img src="assets/spectra/double-slit-thumb.webp" width="960" height="633" loading="lazy" alt="Double-slit interference fringes rendered by Spectra"><figcaption><b>Double slit.</b> Young's fringes emerge from the wave substrate itself. This is Spectra's primary physics prism.</figcaption></figure>
+    </div>
+    <p class="more"><a class="u" href="https://spectra-render.com">More frames, features and supported hardware at spectra-render.com</a></p>
+  </div>
+</section>
+
+<section id="films">
+  <div class="wrap">
+    <h2>The Valor Cat series</h2>
+    <figure class="quote">
+      <img src="assets/films/puppet-head.webp" width="1200" height="716" loading="lazy" alt="A bald puppet head with a black mask lies on its side on a desk beside a yellow pencil">
+      <blockquote><p>&ldquo;The only name in animation.&rdquo;</p><cite>~Nostradamus</cite></blockquote>
+    </figure>
+    <div class="season">
+      <h3>Season 1</h3>
+      <div class="grid">
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="u-SsiuWWv7Y" aria-label="Play S01 E01: From The Top"><img src="https://i.ytimg.com/vi/u-SsiuWWv7Y/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p><b>E01</b>From The Top</p></div>
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="umhnrTizJsc" aria-label="Play S01 E02: Prologue"><img src="https://i.ytimg.com/vi/umhnrTizJsc/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p><b>E02</b>Prologue</p></div>
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="tO9Ck1aekNU" aria-label="Play S01 E02: First Scratch"><img src="https://i.ytimg.com/vi/tO9Ck1aekNU/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p><b>E02</b>First Scratch</p></div>
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="cx0lD5OBIxA" aria-label="Play S01 E03: Musical Part 1"><img src="https://i.ytimg.com/vi/cx0lD5OBIxA/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p><b>E03</b>Musical Part 1</p></div>
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="tlF3ACYBrSo" aria-label="Play S01 E04: Musical Part 2"><img src="https://i.ytimg.com/vi/tlF3ACYBrSo/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p><b>E04</b>Musical Part 2</p></div>
+      </div>
+    </div>
+    <div class="season">
+      <h3>Season 2</h3>
+      <div class="grid">
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="Z9rPVKKpAwI" aria-label="Play S02 E02: Burmac's Revenge - Part 2"><img src="https://i.ytimg.com/vi/Z9rPVKKpAwI/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p><b>E02</b>Burmac&#39;s Revenge - Part 2</p></div>
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="RJ5wGGcuFcc" aria-label="Play S02 E03: Sprinkles Goes Rogue - Part 1"><img src="https://i.ytimg.com/vi/RJ5wGGcuFcc/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p><b>E03</b>Sprinkles Goes Rogue - Part 1</p></div>
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="jkFMykaDJ_Q" aria-label="Play S02 E04: Sprinkles Goes Rogue - Part 2"><img src="https://i.ytimg.com/vi/jkFMykaDJ_Q/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p><b>E04</b>Sprinkles Goes Rogue - Part 2</p></div>
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="EsJGofgg-08" aria-label="Play S02 E05: Burmac Uses His Head"><img src="https://i.ytimg.com/vi/EsJGofgg-08/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p><b>E05</b>Burmac Uses His Head</p></div>
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="rvczIoWD9TU" aria-label="Play S02 E06: Season Finale"><img src="https://i.ytimg.com/vi/rvczIoWD9TU/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p><b>E06</b>Season Finale</p></div>
+      </div>
+    </div>
+    <div class="season">
+      <h3>Season 3</h3>
+      <div class="grid">
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="1VBpAwiHWqk" aria-label="Play S03 E01: Xonco Is Born"><img src="https://i.ytimg.com/vi/1VBpAwiHWqk/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p><b>E01</b>Xonco Is Born</p></div>
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="ENjFYw4XS-s" aria-label="Play S03 E02: Cat Vs Fish In Space"><img src="https://i.ytimg.com/vi/ENjFYw4XS-s/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p><b>E02</b>Cat Vs Fish In Space</p></div>
+      </div>
+    </div>
+    <div class="season">
+      <h3>Films</h3>
+      <div class="grid">
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="bBtzYM3518I" data-start="795" aria-label="Play Feline Paradox, full film"><img src="https://i.ytimg.com/vi/bBtzYM3518I/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p>Feline Paradox<small>Full film, award-winning CG animated film</small></p></div>
+      <div class="vid"><div class="frame"><button class="facade" type="button" data-id="Vetx23gLsA0" data-start="17" aria-label="Play Mirage Maker, CalArts 2014"><img src="https://i.ytimg.com/vi/Vetx23gLsA0/hqdefault.jpg" width="480" height="360" loading="lazy" alt=""><span class="play"><svg width="20" height="22" viewBox="0 0 20 22" aria-hidden="true"><path d="M0 0 20 11 0 22z" fill="currentColor"/></svg></span></button></div><p>Mirage Maker<small>CalArts, 2014</small></p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="studio">
+  <div class="wrap">
+    <h2>Ben Reicher, Founder and CEO</h2>
+    <div class="studio">
+      <figure><img src="assets/studio/ben-reicher.webp" width="640" height="853" loading="lazy" alt="Ben Reicher, smiling, wearing glasses and a blue shirt with a white marine life pattern, outdoors"></figure>
+      <div>
+        <p>Valor Cat Studios is an animation studio based in Los Angeles. I'm an 18-year Animation/VFX industry veteran who has worked at 36+ companies, a 3D generalist with a degree in Animation from CalArts.</p>
+        <p>My approach to this craft is rooted in curiosity. I believe knowledge is earned by trying everything, and wisdom by learning what to leave out. My biggest inspirations are WETA Digital and Batman The Animated Series.</p>
+        <p>Valor Cat is the R&amp;D engine at the heart of my creative practice.</p>
+        <div class="links">
+          <a class="btn prime" href="assets/BenReicher2026.pdf">R&eacute;sum&eacute; (PDF)</a>
+          <a class="btn" href="https://www.imdb.com/name/nm6005405/" rel="noopener">IMDb</a>
+        </div>
+      </div>
+    </div>
+    <figure class="credits">
+      <img src="assets/studio/credits.webp" width="1440" height="543" loading="lazy" alt="Posters and logos for projects Ben Reicher has worked on, including Venom, Jumanji, The Mandalorian, The Call of the Wild, Dora, Fortnite, Star Trek: Picard, Goosebumps 2, Free Guy, The Nutcracker and LEGO 2K Drive">
+    </figure>
+  </div>
+</section>
+
+<section id="shop">
+  <div class="wrap">
+    <h2>Shop</h2>
+    <p class="sub">Valor Cat shirts, hoodies and phone cases, printed and shipped by Society6.</p>
+    <div class="shop-row">
+      <a href="https://society6.com/product/valor-cat-tunnel-run_t-shirt?sku=s6-9272810p15a4v75a5v20a11v50" target="_blank" rel="noopener" title="Tunnel Run tee on Society6"><img src="assets/shop/tunnel-run-tee.webp" width="220" height="279" loading="lazy" alt="Tunnel Run tee, Society6"></a>
+      <a href="https://society6.com/product/valor-cat-tunnel-run_long-sleeve-tshirt?sku=s6-9272810p39a48v351a49v363a50v367" target="_blank" rel="noopener" title="Tunnel Run long-sleeve tee on Society6"><img src="assets/shop/tunnel-run-long-tee.webp" width="220" height="271" loading="lazy" alt="Tunnel Run long-sleeve tee, Society6"></a>
+      <a href="https://society6.com/product/valor-cat-v_long-sleeve-tshirt?sku=s6-9273301p39a48v351a49v363a50v367" target="_blank" rel="noopener" title="V long-sleeve tee on Society6"><img src="assets/shop/v-t.webp" width="220" height="256" loading="lazy" alt="V long-sleeve tee, Society6"></a>
+      <a href="https://society6.com/product/valor-cat-v_t-shirt?sku=s6-9273301p15a4v84a5v20a11v50" target="_blank" rel="noopener" title="V tee on Society6"><img src="assets/shop/v-short-t.webp" width="220" height="269" loading="lazy" alt="V tee, Society6"></a>
+      <a href="https://society6.com/product/valor-cat-v_hoody?sku=s6-9273301p18a7v95a8v36a19v144a100v500" target="_blank" rel="noopener" title="V hoodie on Society6"><img src="assets/shop/v-hoodie.webp" width="220" height="250" loading="lazy" alt="V hoodie, Society6"></a>
+      <a href="https://society6.com/product/valor-caaaaat_hoody?sku=s6-9273475p18a7v118a8v39a19v145a100v501" target="_blank" rel="noopener" title="Valor Caaatttt hoodie on Society6"><img src="assets/shop/valor-caaatttt.webp" width="220" height="246" loading="lazy" alt="Valor Caaatttt hoodie, Society6"></a>
+      <a href="https://society6.com/product/valor-cat-helmet_hoody?sku=s6-9273539p18a7v117a8v39a19v145a100v501" target="_blank" rel="noopener" title="Cat Helmet hoodie on Society6"><img src="assets/shop/cat-helmet.webp" width="220" height="248" loading="lazy" alt="Cat Helmet hoodie, Society6"></a>
+      <a href="https://society6.com/product/valor-city-night_hoody?sku=s6-9273362p18a7v117a8v39a19v145a100v501" target="_blank" rel="noopener" title="City hoodie on Society6"><img src="assets/shop/city-hoodie.webp" width="220" height="249" loading="lazy" alt="City hoodie, Society6"></a>
+      <a href="https://society6.com/product/valor-city-day_phone-skin?sku=s6-9285540p13a3v742" target="_blank" rel="noopener" title="Valor City phone case on Society6"><img src="assets/shop/valor-city-case.webp" width="220" height="330" loading="lazy" alt="Valor City phone case, Society6"></a>
+      <a href="https://society6.com/product/valor-city-night_iphone-case?sku=s6-9273362p20a9v124a52v377" target="_blank" rel="noopener" title="City Night phone case on Society6"><img src="assets/shop/city-night-case.webp" width="220" height="326" loading="lazy" alt="City Night phone case, Society6"></a>
+      <a href="https://society6.com/product/burmac-holds-vial_phone-skin?sku=s6-9272873p13a3v742" target="_blank" rel="noopener" title="Burmac phone case on Society6"><img src="assets/shop/burmac-case.webp" width="220" height="334" loading="lazy" alt="Burmac phone case, Society6"></a>
+      <a href="https://society6.com/product/valor-cat-tunnel-run_iphone-case?sku=s6-9272810p20a9v745a52v377" target="_blank" rel="noopener" title="Tunnel Run phone case on Society6"><img src="assets/shop/tunnel-run-phone-case.webp" width="220" height="349" loading="lazy" alt="Tunnel Run phone case, Society6"></a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <h2>Contact</h2>
+    <p class="sub">Step up and join the cat uprising. Do stay in touch. We enjoy your company.</p>
+    <a class="mail u" href="mailto:ben@valorcatstudios.com">ben@valorcatstudios.com</a>
+    <ul class="social">
+      <li><a class="u" href="https://www.instagram.com/valorcatstudios" rel="noopener">Instagram</a></li>
+      <li><a class="u" href="https://www.youtube.com/c/valorcatstudiosinc" rel="noopener">YouTube</a></li>
+      <li><a class="u" href="https://www.linkedin.com/in/benjamin-reicher-439b6b57" rel="noopener">LinkedIn (Ben)</a></li>
+      <li><a class="u" href="https://www.linkedin.com/company/valor-cat-studios" rel="noopener">LinkedIn (Valor Cat Studios)</a></li>
+      <li><a class="u" href="https://www.imdb.com/name/nm6005405/" rel="noopener">IMDb</a></li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>&copy; 2026 Valor Cat Studios. Spectra Render&trade; and the Reality Engine&trade; are trademarks of Valor Cat Studios.</p>
+  </div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const v = document.querySelector('.live video');
+  if (reduce) v.controls = true;
+  else new IntersectionObserver(es => es.forEach(e => e.isIntersecting ? e.target.play().catch(() => {}) : e.target.pause()), { threshold: .25 }).observe(v);
+  document.addEventListener('click', e => {
+    const b = e.target.closest('.facade'); if (!b) return;
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube-nocookie.com/embed/' + b.dataset.id + '?autoplay=1&rel=0' + (b.dataset.start ? '&start=' + b.dataset.start : '');
+    f.title = b.getAttribute('aria-label').replace(/^Play /, '');
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+    f.allowFullscreen = true;
+    b.replaceWith(f); f.focus();
+  });
+})();
+</script>
+</body>
+</html>
